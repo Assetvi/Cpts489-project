@@ -27,7 +27,11 @@ const db = new sqlite3.Database('database.db', (err) => {
 
 // Use home controller
 const homeController = require('./controllers/homeController');
+const loginController = require('./controllers/loginController');
+const registerController = require('./controllers/registerController');
 app.use('/', homeController);
+app.use('/login', loginController);
+app.use('/register', registerController);
 
 // Start server
 const PORT = process.env.PORT || 3000;
