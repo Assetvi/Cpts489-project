@@ -31,6 +31,12 @@ app.use('/', homeController);
 
 // Start server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+const server = app.listen(PORT, (err) => {
+    if (err) {
+        console.error('Error starting server:', err);
+    } else {
+        console.log(`Server is running on port ${PORT}`);
+    }
 });
+
+module.exports = server;
