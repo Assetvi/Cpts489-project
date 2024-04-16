@@ -1,10 +1,13 @@
-const express = require('express');
+var express = require('express');
 const User = require('../models/User');
-const router = express.Router();
+var router = express.Router();
 
 // Route to render login
-router.get('/', (req, res) => {
+router.get('/', function(req, res,next) {
     // Render login
+    if(req.query.msg){
+      res.locals.msg = req.query.msg
+    }
     res.render('login');
 });
 
@@ -13,7 +16,7 @@ router.post('/login', async function(req, res, next) {
     const user = await User.findUser(req.body.username, req.body.password)
     if(user!== null){
       req.session.user = user
-      res.redirect("./?msg=login")
+      res.redirect("/?msg=success")
     }else{
       res.redirect("/?msg=fail")
     }
