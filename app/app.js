@@ -49,6 +49,17 @@ app.use(session({
 //     res.render('error');
 //   });
 
+
+app.use(function(req,res,next){
+    res.locals.activeUser = false
+    if(req.session.user){
+        res.locals.user = req.session.user
+        res.locals.activeUser = true
+    }
+    next();
+})
+
+
 async function setup(){
     const sawyer = await User.create ({username:"sawyer", password:"1234", email:"sb@sb.com"})
     console.log("sawyer instance created...")
@@ -78,5 +89,15 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+app.get('/logout', function(req,res, next){
+    if(req.session.user){
+      req.session.destroy()
+      res.redirect("/?msg=logout")
+    }else {
+      res.redirect("/")
+    }
+    
+  })
 
 module.exports = app;
