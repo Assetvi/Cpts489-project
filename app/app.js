@@ -5,8 +5,8 @@ const sqlite3 = require('sqlite3').verbose(); // Import SQLite module
 
 const app = express();
 
-// Serve public files from the public directory within the views directory
-app.use(express.static("public"));
+// Serve public files from the public directory
+app.use(express.static("./public"));
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
@@ -15,6 +15,14 @@ app.set("views", path.join(__dirname, "views"));
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Session management middleware
+app.use(session({
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true } // Note: Set to true only in HTTPS environments
+}));
 
 // SQLite database initialization
 const db = new sqlite3.Database('database.db', (err) => {

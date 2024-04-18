@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const TMDbAPI = require("../utils/TMDbCommunication"); // Import the TMDbCommunication module
-const createTable = require("../utils/sqliteTableCreator");
 
 // Route to fetch movies for a specific page and render the home page (GET request)
 router.get('/', async (req, res) => {
