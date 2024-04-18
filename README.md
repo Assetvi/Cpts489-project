@@ -3,7 +3,7 @@
 Movie Rating Site
 -
 
-By: Trevor Buchanan, Sawyer Bittner, and Kwan Tou To
+By: Trevor Buchanan, and Sawyer Bittner
 
 Run Directions:
 -
