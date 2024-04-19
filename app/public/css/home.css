@@ -1,0 +1,52 @@
+.poster {
+    border-radius: 1rem;
+    width: 10rem;
+    height: 15rem;
+    margin: 0;
+    margin-bottom: 0.2rem;
+}
+
+.pagebutton {
+    width: 6rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border-color: #408558;
+    border-style: solid;
+    background-color: #222529;
+    text-align: center;
+    vertical-align: middle;
+    color: #408558;
+    text-decoration: none;
+    margin-bottom: 5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    padding: 0.2rem;
+}
+.pagebutton:hover {
+    color: white;
+    background-color: #408558;
+}
+
+.movie {
+    background-color: #222529;
+    height: 20rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.movieTitle {
+    color: rgb(228, 228, 228);
+    margin: 0 0.5rem;
+}
+
+#rating {
+    background-color: #408558;
+    border-color: #222529;
+    border-radius: 2.5rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    text-align: center;
+    vertical-align: middle;
+}
