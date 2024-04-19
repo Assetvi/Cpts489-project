@@ -2,7 +2,6 @@ const express = require('express');
 const session = require("express-session");
 var createError = require('http-errors');
 const path = require('path');
-var cookieParser = require('cookie-parser');
 const sqlite3 = require('sqlite3').verbose(); // Import SQLite module
 const sequelize = require('./db');
 const User = require('./models/User')
@@ -23,7 +22,6 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger('dev'));
-app.use(cookieParser());
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
