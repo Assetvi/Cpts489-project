@@ -62,7 +62,10 @@ app.use(function(req,res,next){
 
 async function setup(){
     const sawyer = await User.create ({username:"sawyer", password:"1234", email:"sb@sb.com"})
-    console.log("sawyer instance created...")
+    const trevor = await User.create ({username:"trevor",password:"1234",email:"tb@tb.com"})
+    const johnny = await User.create ({username: "johnny", password: "1234", email: "jg@jg.com"})
+    await sawyer.addFriend(sawyer.username, trevor.username)
+    console.log("user instances created...")
   }
 
   sequelize.sync({ force:true}).then(()=>{
@@ -99,5 +102,14 @@ app.get('/logout', function(req,res, next){
     }
     
   })
+
+app.get("/:username", async function(req,res,next){
+  const user = req.session.user
+  if(user){
+    res.render('profile',{user})
+  }else{
+    res.redirect('/?msg=user+not+found&?username='+req.params.username)
+  }
+})
 
 module.exports = app;
