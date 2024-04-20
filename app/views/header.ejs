@@ -1,48 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-    <!-- Links and site icon and name content -->
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/css/header.css" />
-        <link rel="icon" href="/images/Icon.png"> <!-- Icon of page title -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-            rel="stylesheet">
+        <link rel="icon" href="/images/Icon.png">
+        <!-- Bootstrap CSS -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous" />
+            rel="stylesheet">
+        <!-- Bootstrap JS bundle -->
         <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-        <title> Movie Ratings </title>
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <title>Movie Ratings</title>
     </head>
-
-    <!-- Content of page -->
-
     <body class="body">
-        <!-- Navbar content -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark"
             style="height: 5rem;">
             <div class="container-fluid" style="margin-left: 10rem;">
-                <img class="headerImage" src="/images/Icon.png" alt="Icon of page title">
-                <span class="navbar-brand">Movie Ratings </span>
-                <button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <img class="headerImage" src="/images/Icon.png"
+                    alt="Icon of page title">
+                <span class="navbar-brand">Movie Ratings</span>
+
                 <div class="collapse navbar-collapse"
                     id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -53,8 +35,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/addMovie">Add Movie</a>
                         </li>
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active" href="#"
+                            <a class="nav-link dropdown-toggle"
                                 id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Personal
@@ -68,14 +51,11 @@
                                 <li><a class="dropdown-item"
                                         href="/alreadyWatched">Already
                                         Watched</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item"
                                         href="/profile">Profile</a></li>
                             </ul>
                         </li>
-
                         <% if(!activeUser){ %>
                         <li class="nav-item">
                             <a class="nav-link active" href="/login">Login</a>
@@ -86,7 +66,6 @@
                         </li>
                         <% } %>
                     </ul>
-
                     <form class="d-flex" style="margin-right: 10rem;">
                         <input class="form-control me-2" type="search"
                             placeholder="Search" aria-label="Search">
@@ -96,6 +75,24 @@
                 </div>
             </div>
         </nav>
-    </body>
 
+        <!-- Flash messages container -->
+        <div class="container"
+            style="position: relative; margin: 0 auto; width: 50%;">
+            <% if (message.length > 0) { %>
+            <div class="alert alert-warning alert-message" role="alert"
+                style="position: absolute; top: 20px; width: 100%; z-index: 1000; border:#40855898 solid; background-color: #40855853; color:#222529;">
+                <%= message %>
+            </div>
+            <% } %>
+        </div>
+
+        <!-- JavaScript for fading out flash messages -->
+        <script>
+            $(document).ready(function() {
+                // Fade out flash messages after 3 seconds
+                $(".alert-message").delay(3000).fadeOut("slow");
+            });
+        </script>
+    </body>
 </html>

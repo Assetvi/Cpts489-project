@@ -8,15 +8,24 @@ router.get('/', async (req, res) => {
         const movieId = req.query.id;
         const movie = await TMDbAPI.getMovieDetailsById(movieId);
 
+        if (!movie) {
+            req.flash('message', 'Movie not found');
+            res.redirect('/'); // Redirect to home page with error message
+            return;
+        }
+
         res.render('movie', { 
             movie: movie,
-            TMDbAPI : TMDbAPI
+            TMDbAPI : TMDbAPI,
+            message: req.flash('message')
         });
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).send('Error fetching movie details');
+        req.flash('message', 'An error occurred while fetching the movie');
+        res.redirect('/'); // Redirect to home page with error message
     }
 });
 
 
 module.exports = router;
+

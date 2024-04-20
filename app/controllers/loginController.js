@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 router.get('/', function(req, res, next) {
     if (req.session.user) {
-        res.redirect("/home"); // Redirect to home if user is already logged in
+        res.redirect("/"); // Redirect to home if user is already logged in
     } else {
         res.render('login', { message: req.flash('message') });
     }
