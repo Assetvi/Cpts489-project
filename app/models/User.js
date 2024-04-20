@@ -17,33 +17,29 @@ class User extends Model{
         }
     }
 
-    static async addFriend(username1, username2){
-      try{
-        const user1 = await User.findByPk(username1)
-        const user2 = await User.findByPk(username2)
-        if(user1.friends == null)
-        {
-          user1.friends = ""
-        }
-        if(user2.friends == null)
-        {
-          user2.friends = ""
-        }
-        if (!user1.friends.includes(user2.username) && !user2.friends.includes(user1.username))
-        {
-          user1.friends = user1.friends.concat(user2.username)
-          user2.friends = user2.friends.concat(user1.username)
-          console.log("sawyer & trevor are now friends")
-        }
-        else
-        {
-          console.log("sawyer & trevor are ?")
-        }
+    // async addFriend(user2){
+    //   try{
+    //     //const user2 = await User.findByPk(username2)
+    //     if (!this.friends.includes(user2.username) && !user2.friends.includes(this.username))
+    //     {
+    //       this.friends = this.friends.concat(user2.username)
+    //       user2.addFriend(this)
+    //       console.log(Boolean(this.friends.includes(user2.username)))
+    //       sequelize.sync()
+    //     }
+    //     else if(!this.friends.includes(user2.username))
+    //     {
+    //       this.friends = this.friends.concat(user2.username)
+    //     }
+    //     else
+    //     {
+    //       console.log("what")
+    //     }
 
-      }catch (error){
-        console.log(error)
-      }
-    }
+    //   }catch (error){
+    //     console.log(error)
+    //   }
+    // }
 }
 
 User.init({
@@ -62,11 +58,11 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    friends: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      //defaultValue: ""
-    }
+    // friends: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   defaultValue: ""
+    // }
   }, {
     // Other model options go here
     sequelize, // We need to pass the connection instance
