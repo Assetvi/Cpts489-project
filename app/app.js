@@ -8,8 +8,14 @@ const app = express();
 
 // Controllers
 const homeController = require('./controllers/homeController');
-const movieController = require("./controllers/movieController")
+const movieController = require("./controllers/movieController");
+const friendsController = require("./controllers/friendsController");
+const watchLaterController = require("./controllers/watchLaterController");
+const alreadyWatchedController = require("./controllers/alreadyWatchedController");
+const profileController = require("./controllers/profileController");
+const addMovieController = require("./controllers/addMovieController");
 const loginController = require('./controllers/loginController');
+const logoutController = require('./controllers/logoutController');
 const registerController = require('./controllers/registerController');
 
 // Serve public files from the public directory within the views directory
@@ -56,12 +62,16 @@ const db = new sqlite3.Database('database.db', (err) => {
 
 // Use controllers
 app.use('/', homeController);
-app.use('/login', loginController);
-app.use('/register', registerController);
 app.use('/movie', movieController);
-// app.use('/addMovie', addMovieController);
-// app.use('/profile', profileController);
-// app.use('/friends', friendsController);
+app.use('/friends', friendsController);
+app.use('/watchLater', watchLaterController);
+app.use('/alreadyWatched', alreadyWatchedController);
+app.use('/profile', profileController);
+app.use('/addMovie', addMovieController);
+app.use('/login', loginController);
+app.use('/logout', logoutController);
+app.use('/register', registerController);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
