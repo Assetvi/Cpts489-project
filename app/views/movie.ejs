@@ -16,19 +16,33 @@
         <div class="container" style="margin: 0rem 10rem; width: 77%;">
             <div class="row">
                 <div class="col">
+                    <!-- Display movie poster -->
+                    <img class="moviePagePoster"
+                    src="<%= TMDbAPI.getPosterImageUrl(movie.poster_path) %>"
+                    alt="Movie Poster">
                     <h1
                         style="margin-bottom: 3rem; color:#222529; font-weight: bold;">
                         <%= movie.title %> </h1>
                     <!-- Movie details -->
                     <div id="movieDetails">
-                        <!-- Display movie poster -->
-                        <img class="poster"
-                            src="<%= TMDbAPI.getPosterImageUrl(movie.poster_path) %>"
-                            alt="Movie Poster">
                         <!-- Display movie rating -->
-                        <p>Rating: <%= movie.vote_average.toFixed(1) %></p>
-                        <!-- Display movie actors -->
-                        <p>Actors: <%= movie.actors %></p>
+                        <p class="subTitle">Rating: </p>
+                        <p class="subTitle" style="color: #408558; margin-bottom: 30px;"><%= movie.vote_average.toFixed(1) %></p>
+                        <!-- Display movie release date -->
+                        <p class="subTitle">Release Date: </p>
+                        <p class="subTitle" style="color: #408558; margin-bottom: 30px;"><%= movie.release_date %></p>
+                        <!-- Display movie genres -->
+                        <p class="subTitle">Genres:</p>
+                        <% if (movie.genres && movie.genres.length > 0) { %>
+                        <% movie.genres.forEach(genre => { %>
+                        <span class="subTitle" style="color: #408558; margin-right: 15px;"><%= genre.name %></span>
+                        <% }) %>
+                        <% } else { %>
+                        <p>No genre found</p>
+                        <% } %>
+                        <!-- Display movie overview -->
+                        <p class="subTitle" style="margin-top: 30px">Overview: </p>
+                        <p class="subTitle" style="font-weight: normal; margin-bottom: 30px; width: 65%;"><%= movie.overview %></p>
                     </div>
                 </div>
             </div>

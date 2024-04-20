@@ -11,6 +11,13 @@
     display: block;
 }
 
+.moviePagePoster {
+    border-radius: 10px;
+    width: 32%;
+    float: right;
+    margin-bottom: 100px;
+}
+
 .pagebutton {
     width: 6rem;
     height: 2rem;
@@ -28,6 +35,7 @@
     font-size: 1.2rem;
     padding: 0.2rem;
 }
+
 .pagebutton:hover {
     color: white;
     background-color: #408558;
@@ -47,16 +55,23 @@
     margin: 0 0.4rem;
 }
 
+.subTitle {
+    color: #222529;
+    font-size: larger;
+    font-weight: bold;
+    margin: 0;
+}
+
 #rating {
     position: absolute;
     margin: 0;
-    top: 10px; 
+    top: 10px;
     left: 10px;
     height: 2.5rem;
     width: 2.5rem;
     border: solid;
     background-color: #408558;
-    color: white; 
+    color: white;
     padding: 5px 0px;
     border-radius: 2.5rem;
     text-align: center;
