@@ -2,8 +2,17 @@ const express = require("express");
 const router = express.Router();
 const TMDbAPI = require("../utils/TMDbCommunication"); // Import the TMDbCommunication module
 
+// Middleware function to check if user is logged in
+function requireLogin(req, res, next) {
+    if (req.session.user) {
+        next(); // User is logged in, proceed to next middleware
+    } else {
+        res.redirect('/login'); // User is not logged in, redirect to login page
+    }
+}
+
 // Route to fetch movies for a specific page and render the home page (GET request)
-router.get('/', async (req, res) => {
+router.get('/', requireLogin, async (req, res) => {
     try {
         const maxMovies = 1000; // Maximum number of movies to fetch
         const page = parseInt(req.query.page) || 1;
@@ -15,11 +24,12 @@ router.get('/', async (req, res) => {
 
         const paginatedMovies = movies.slice(offset, offset + pageSize);
 
-        res.render('home', { 
+        res.render('home', {
             movies: paginatedMovies,
             currentPage: page,
             totalPages: totalPages,
-            TMDbAPI : TMDbAPI
+            TMDbAPI: TMDbAPI,
+            user: req.session.user // Pass user data to the view
         });
     } catch (error) {
         console.error('Error:', error);

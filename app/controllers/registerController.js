@@ -1,38 +1,40 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User')
+const User = require('../models/User');
 
-const sessionChecker = (req, res, next)=>{
-    if(!req.session.user){
-    //   res.locals.username = req.session.user.username
-      next()
-    }else{
-      res.redirect("../?msg=raf")
+const sessionChecker = (req, res, next) => {
+    if (!req.session.user) {
+        next();
+    } else {
+        res.redirect("/home");
     }
-  }
-  
-  router.use(sessionChecker)
+};
 
-// Route to render register
+router.use(sessionChecker);
+
+// Route to render register page
 router.get('/', (req, res) => {
-    // Render register
-    res.render('register');
+    res.render('register', { message: req.flash('info') }); // Show flash messages stored under 'info'
 });
 
-router.post('/register', async function(req,res,next){
-    try{
-        await User.create(
-            {
-                username: req.body.username,
-                password: req.body.password,
-                email: req.body.email,
-                // friends: ""
-            }
-        )
-        res.redirect('/?msg=success')
-    }catch (error){
-        res.redirect('/?msg=fail')
+// Route to handle registration
+router.post('/', async function(req, res, next) {
+    const { username, password, email } = req.body;
+    try {
+        const existingUser = await User.findOne({ username: username });
+        if (existingUser) {
+            req.flash('info', 'User already exists'); // Set flash message
+            res.redirect('/register');
+            return;
+        }
+        await User.create({ username, password, email });
+        req.flash('info', 'Registration successful, please log in'); // Set flash message
+        res.redirect('/login');
+    } catch (error) {
+        console.error('Registration failed:', error);
+        req.flash('info', 'Registration failed'); // Set flash message
+        res.redirect('/register');
     }
-})
+});
 
 module.exports = router;
