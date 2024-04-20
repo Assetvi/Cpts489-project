@@ -25,7 +25,8 @@ router.post('/register', async function(req,res,next){
             {
                 username: req.body.username,
                 password: req.body.password,
-                email: req.body.email
+                email: req.body.email,
+                // friends: ""
             }
         )
         res.redirect('/?msg=success')
