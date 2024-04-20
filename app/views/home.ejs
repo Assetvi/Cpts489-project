@@ -42,24 +42,26 @@
                     <div class="row">
                         <% if (movies && movies.length > 0) { %>
                             <% movies.forEach(movie => { %>
-                                <div class="col-md-2">
-                                    <div class="movie">
-                                        <% if (movie && movie.poster_path) { %>
-                                            <div>
-                                                <img class="poster"
-                                                    src="<%= TMDbAPI.getPosterImageUrl(movie.poster_path) %>"
-                                                    alt="Movie Poster">
-                                            </div>
-                                        <% } else { %>
-                                            <p>No poster available</p>
-                                        <% } %>
-                                        <% if (movie) { %>
-                                            <p class="movieTitle"> <%= movie.title %> </p>
-                                            <div id="rating">
-                                                <p class="movieTitle"> <%= movie.vote_average %> </p>
-                                            </div>
-                                        <% } %>
-                                    </div>
+                                <div class="col-lg-2 col-md-3 col-sm-4">
+                                    <a href="/movie?id=<%- movie.id %>" style="text-decoration: none;">
+                                        <div class="movie">
+                                            <% if (movie && movie.poster_path) { %>
+                                                <div class="movie-container">
+                                                    <img class="poster"
+                                                        src="<%= TMDbAPI.getPosterImageUrl(movie.poster_path) %>"
+                                                        alt="Movie Poster">
+                                                    <div id="rating">
+                                                        <p class="movieTitle"> <%= movie.vote_average.toFixed(1) %> </p>
+                                                    </div>
+                                                </div>
+                                            <% } else { %>
+                                                <p class="movieTitle"> No poster available </p>
+                                            <% } %>
+                                            <% if (movie) { %>
+                                                <p class="movieTitle"> <%= movie.title %> </p>
+                                            <% } %>
+                                        </div>
+                                    </a>
                                 </div>
                             <% }) %>
                         <% } else { %>
@@ -71,7 +73,7 @@
             <div class="row">
                 <!-- Page change info -->
                 <div class="pagination">
-                    <div style="margin: auto; margin-bottom: 5rem;">
+                    <div style="margin: auto; margin-bottom: 5rem; margin-top: 20px">
                         <% if (currentPage > 1) { %>
                         <a href="?page=<%= currentPage - 1 %>"
                             class="pagebutton">Previous</a>
@@ -83,6 +85,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Page end -->
+        <div id="pageEnd">
         </div>
     </body>
 </html>

@@ -7,6 +7,7 @@ const sequelize = require('./utils/db');
 const User = require('./models/User')
 const app = express();
 const homeController = require('./controllers/homeController');
+const movieController = require("./controllers/movieController")
 const loginController = require('./controllers/loginController');
 const registerController = require('./controllers/registerController');
 var logger = require('morgan');
@@ -22,6 +23,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger('dev'));
+
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
@@ -79,8 +81,11 @@ const db = new sqlite3.Database('database.db', (err) => {
 
 // Use home controller
 app.use('/', homeController);
+// User login and register controller
 app.use('/login', loginController);
 app.use('/register', registerController);
+// Use movie controller
+app.use('/movie', movieController);
 
 // Start server
 const PORT = process.env.PORT || 3000;

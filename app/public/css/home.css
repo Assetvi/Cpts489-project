@@ -1,9 +1,14 @@
+.movie-container {
+    position: relative;
+    display: inline-block;
+}
+
 .poster {
-    border-radius: 1rem;
-    width: 10rem;
-    height: 15rem;
+    border-radius: 10px;
+    width: 100%;
+    height: 16rem;
     margin: 0;
-    margin-bottom: 0.2rem;
+    display: block;
 }
 
 .pagebutton {
@@ -30,23 +35,36 @@
 
 .movie {
     background-color: #222529;
-    height: 20rem;
-    border-radius: 1rem;
+    width: 107%;
+    height: 21rem;
+    border-radius: 10px;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1px;
 }
 
 .movieTitle {
     color: rgb(228, 228, 228);
-    margin: 0 0.5rem;
+    margin: 0 0.4rem;
 }
 
 #rating {
-    background-color: #408558;
-    border-color: #222529;
-    border-radius: 2.5rem;
+    position: absolute;
+    margin: 0;
+    top: 10px; 
+    left: 10px;
     height: 2.5rem;
     width: 2.5rem;
+    border: solid;
+    background-color: #408558;
+    color: white; 
+    padding: 5px 0px;
+    border-radius: 2.5rem;
     text-align: center;
     vertical-align: middle;
+}
+
+#pageEnd {
+    background-color: #222529;
+    height: 200px;
+    width: 100%;
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Movie Details</title>
+    </head>
+    <body>
+        <!-- Navbar content -->
+        <header>
+            <%- include("header") %>
+        </header>
+
+        <!-- Page content -->
+        <hr style="border-top: 5px solid; margin: 0px 0px 3rem">
+        <div class="container" style="margin: 0rem 10rem; width: 77%;">
+            <div class="row">
+                <div class="col">
+                    <h1
+                        style="margin-bottom: 3rem; color:#222529; font-weight: bold;">
+                        <%= movie.title %> </h1>
+                    <!-- Movie details -->
+                    <div id="movieDetails">
+                        <!-- Display movie poster -->
+                        <img class="poster"
+                            src="<%= TMDbAPI.getPosterImageUrl(movie.poster_path) %>"
+                            alt="Movie Poster">
+                        <!-- Display movie rating -->
+                        <p>Rating: <%= movie.vote_average.toFixed(1) %></p>
+                        <!-- Display movie actors -->
+                        <p>Actors: <%= movie.actors %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page end -->
+        <div id="pageEnd"></div>
+    </body>
+</html>
