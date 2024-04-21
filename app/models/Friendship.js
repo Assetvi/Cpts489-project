@@ -2,7 +2,7 @@ const sequelize = require('../utils/db')
 const {Model,DataTypes} = require('sequelize')
 const {Op} = require('sequelize')
 
-class Friendship extends Model{
+class Friendship extends Model {
     static async findFriends(username){
         const friendList = await Friendship.findAll({
             where: {
