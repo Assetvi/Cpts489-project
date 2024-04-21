@@ -25,4 +25,13 @@ router.get('/', async (req, res) => {
     }
 });
 
+// app.get("/profile/:username", async function (req,res,next){
+//   const user = await User.findByPk(req.params.username)
+//   if(user){
+//     res.render('profile',{user})
+//   }else{
+//     res.redirect('/?msg=user+not+found?username='+req.params.username)
+//   }
+// })
+
 module.exports = router;

@@ -25,4 +25,19 @@ router.get('/', async (req, res) => {
     }
 });
 
+// app.get("/users", async function (req,res,next){
+//   const users = await User.findAll({
+//     attributes:['username'],
+//     where: {
+//     [Op.not]: [{username:req.session.user.username}]
+//     }})
+//   const friends = await Friendship.findFriends(req.session.user.username)
+//   res.render('users',{users,friends})
+// })
+
+// app.get("/addfriend/:username", async function (req,res,next){
+//   const newFriend = await Friendship.create({username1:req.session.user.username, username2:req.params.username})
+//   res.redirect('/users')
+// })
+
 module.exports = router;
