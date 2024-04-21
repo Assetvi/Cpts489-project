@@ -153,7 +153,7 @@ app.get("/users", async function (req,res,next){
 
 app.get("/addfriend/:username", async function (req,res,next){
   const newFriend = await Friendship.create({username1:req.session.user.username, username2:req.params.username})
-  res.redirect('/friends')
+  res.redirect('/users')
 })
 
 module.exports = app;

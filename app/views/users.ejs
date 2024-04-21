@@ -16,7 +16,7 @@
                     <% if (friends.includes(user.username)){ %>
                         <p>A friend!</p>
                     <% }else{ %>
-                    <button>Add Friend</button>
+                    <button type="button"><a href = <%="/addfriend/"+user.username%>>Add Friend</a></button>
                     <%}%>
                 </li>
                     <%}%>
