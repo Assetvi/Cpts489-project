@@ -7,7 +7,8 @@ function requireLogin(req, res, next) {
     if (req.session.user) {
         next(); // User is logged in, proceed to next middleware
     } else {
-        res.render('login', { message: req.flash('message') }); // User is not logged in, redirect to login page
+        req.flash('message', ' Please log in to access this page'); // Set flash message
+        res.redirect('/login'); // Redirect to login page
     }
 }
 

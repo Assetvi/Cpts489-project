@@ -64,10 +64,10 @@ const db = new sqlite3.Database('database.db', (err) => {
 app.use('/', homeController);
 app.use('/movie', movieController);
 app.use('/friends', friendsController);
-app.use('/watchLater', watchLaterController);
-app.use('/alreadyWatched', alreadyWatchedController);
+app.use('/watch-later', watchLaterController);
+app.use('/already-watched', alreadyWatchedController);
 app.use('/profile', profileController);
-app.use('/addMovie', addMovieController);
+app.use('/add-movie', addMovieController);
 app.use('/login', loginController);
 app.use('/logout', logoutController);
 app.use('/register', registerController);

@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Links and site icon and name content -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="icon" href="images/Icon.png"> <!-- Icon of page title -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+            rel="stylesheet">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+        <script src="../controllers/friendsController.js"></script>
+        <title> Movie Ratings | Friends </title>
+    </head>
+    <body>
+        <!-- Navbar content -->
+        <header>
+            <%- include("header") %>
+        </header>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-
-<body>
-    <%- include("header") %>
-</body>
+        <!-- Page content -->
+        <hr style="border-top: 5px solid; margin: 0px 0px 3rem">
+        <div class="container" style="margin: 100px 10rem; width: 77%;">
+            <div class="row">
+                <div class="col">
+                    <h1
+                        style="margin-bottom: 2rem; color:#222529; font-weight: bold;">
+                        <%= user.username %>'s Friends </h1>
+                    <a class="sitebutton" href="profile">
+                        Back to profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
