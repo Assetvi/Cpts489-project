@@ -9,4 +9,12 @@
 
 <body>
     <%- include("header") %>
+        <p>Friends:</p>
+        <ul title="Friends:">
+            <!-- <p>Friends:</p> -->
+            <% for ( friend of friends){%>
+                <li><a href = <%= "/profile/"+friend %>><%= friend%></a></li>
+                    <%}%>
+        </ul>
+        <a href="/users">Add more friends!</a>
 </body>

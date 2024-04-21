@@ -4,6 +4,7 @@ var createError = require('http-errors');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose(); // Import SQLite module
 const sequelize = require('./utils/db');
+const { Op } = require('sequelize')
 const User = require('./models/User')
 const app = express();
 const homeController = require('./controllers/homeController');
@@ -59,21 +60,14 @@ app.use(function (req, res, next) {
   next();
 })
 
-// async function addFriend(username2) {
-//   const friends = await Friendship.create({ username1: res.locals.user.username, username2: username2 })
-// }
-
 async function setup() {
   const sawyer = await User.create({ username: "sawyer", password: "1234", email: "sb@sb.com" })
   const trevor = await User.create({ username: "trevor", password: "1234", email: "tb@tb.com" })
   const johnny = await User.create({ username: "johnny", password: "1234", email: "jg@jg.com" })
-  // await sawyer.addFriend(johnny.username)
-  // console.log(Boolean(sawyer.friends.includes(johnny.username)))
-  // console.log(sawyer.friends)
   const friends = await Friendship.create({ username1: "sawyer", username2: "trevor" })
-  const alsofriends = await Friendship.create({username1:"sawyer",username2:"johnny"})
-  const friendList = await Friendship.findFriends("sawyer")
-  console.log(Boolean(friendList.length == 2))
+  //const alsofriends = await Friendship.create({username1:"sawyer",username2:"johnny"})
+  // const friendList = await Friendship.findFriends("sawyer")
+  // console.log(Boolean(friendList.length == 2))
   console.log("user instances created...")
 }
 
@@ -119,34 +113,47 @@ app.get('/logout', function (req, res, next) {
 
 })
 
-app.get("/:username", async function (req, res, next) {
+app.get("/profile", async function (req, res, next) {
   const user = req.session.user
   if (user) {
-    const friends = await Friendship.findFriends(req.session.user.username)
-    for (let friend in friends){
-      console.log(friend)
-    }
-  
-  //return friendList
-    res.render('profile', { user, friends })
+    res.render('profile', { user })
   } else {
     res.redirect('/?msg=user+not+found&?username=' + req.params.username)
   }
 })
 
-app.get("/:username", async function (req, res, next) {
+app.get("/profile/:username", async function (req,res,next){
+  const user = await User.findByPk(req.params.username)
+  if(user){
+    res.render('profile',{user})
+  }else{
+    res.redirect('/?msg=user+not+found?username='+req.params.username)
+  }
+})
+
+app.get("/friends", async function (req, res, next) {
   const user = req.session.user
   if (user) {
     const friends = await Friendship.findFriends(req.session.user.username)
-    for (let friend in friends){
-      console.log(friend)
-    }
-  
-  //return friendList
     res.render('friends', { user, friends })
   } else {
     res.redirect('/?msg=user+not+found&?username=' + req.params.username)
   }
+})
+
+app.get("/users", async function (req,res,next){
+  const users = await User.findAll({
+    attributes:['username'],
+    where: {
+    [Op.not]: [{username:req.session.user.username}]
+    }})
+  const friends = await Friendship.findFriends(req.session.user.username)
+  res.render('users',{users,friends})
+})
+
+app.get("/addfriend/:username", async function (req,res,next){
+  const newFriend = await Friendship.create({username1:req.session.user.username, username2:req.params.username})
+  res.redirect('/friends')
 })
 
 module.exports = app;

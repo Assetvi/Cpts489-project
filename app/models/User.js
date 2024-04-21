@@ -16,30 +16,6 @@ class User extends Model{
             return null
         }
     }
-
-    // async addFriend(user2){
-    //   try{
-    //     //const user2 = await User.findByPk(username2)
-    //     if (!this.friends.includes(user2.username) && !user2.friends.includes(this.username))
-    //     {
-    //       this.friends = this.friends.concat(user2.username)
-    //       user2.addFriend(this)
-    //       console.log(Boolean(this.friends.includes(user2.username)))
-    //       sequelize.sync()
-    //     }
-    //     else if(!this.friends.includes(user2.username))
-    //     {
-    //       this.friends = this.friends.concat(user2.username)
-    //     }
-    //     else
-    //     {
-    //       console.log("what")
-    //     }
-
-    //   }catch (error){
-    //     console.log(error)
-    //   }
-    // }
 }
 
 User.init({
