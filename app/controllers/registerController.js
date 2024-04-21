@@ -1,38 +1,60 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User')
+const User = require('../models/User');
 
-const sessionChecker = (req, res, next)=>{
-    if(!req.session.user){
-    //   res.locals.username = req.session.user.username
-      next()
-    }else{
-      res.redirect("../?msg=raf")
+const sessionChecker = (req, res, next) => {
+    if (!req.session.user) {
+        next();
+    } else {
+        res.redirect("/");
     }
-  }
-  
-  router.use(sessionChecker)
+};
 
-// Route to render register
+router.use(sessionChecker);
+
+// Route to render register page
 router.get('/', (req, res) => {
-    // Render register
-    res.render('register');
+    res.render('register', { message: req.flash('message') });
 });
 
-router.post('/register', async function(req,res,next){
-    try{
-        await User.create(
-            {
-                username: req.body.username,
-                password: req.body.password,
-                email: req.body.email,
-                // friends: ""
-            }
-        )
-        res.redirect('/?msg=success')
-    }catch (error){
-        res.redirect('/?msg=fail')
+// Validate email format
+const validateEmail = (email) => {
+    // A more lenient email validation regex
+    const re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    return re.test(email);
+};
+
+// Route to handle registration
+router.post('/', async function(req, res, next) {
+    const { username, password, email } = req.body;
+    // Basic validation
+    if (!username || !password || !email) {
+        req.flash('message', 'Please fill in all fields');
+        res.redirect('/register');
+        return;
     }
-})
+    if (!validateEmail(email)) {
+        req.flash('message', 'Please enter a valid email address');
+        res.redirect('/register');
+        return;
+    }
+
+    try {
+        const existingUser = await User.findOne({ where: { username: username } });
+        if (existingUser) {
+            req.flash('message', 'User already exists');
+            console.log('User already exists:', username);
+            res.redirect('/register');
+            return;
+        }
+        await User.create({ username, password, email });
+        req.flash('message', 'Registration successful, please log in');
+        res.redirect('/login');
+    } catch (error) {
+        console.error('Registration failed:', error);
+        req.flash('message', 'Registration failed');
+        res.redirect('/register');
+    }
+});
 
 module.exports = router;

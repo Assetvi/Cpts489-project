@@ -1,0 +1,162 @@
+.pageIcon {
+    margin: 0;
+    margin-right: 20px;
+    height: 60px;
+}
+
+.movie-container {
+    position: relative;
+    display: inline-block;
+}
+
+.poster {
+    border-radius: 10px;
+    width: 100%;
+    height: 16rem;
+    margin: 0;
+    display: block;
+}
+
+.pagebutton {
+    width: 6rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border-color: #408558;
+    border-style: solid;
+    background-color: #222529;
+    text-align: center;
+    vertical-align: middle;
+    color: #408558;
+    text-decoration: none;
+    margin-bottom: 5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    padding: 0.2rem;
+}
+.pagebutton:hover {
+    color: white;
+    background-color: #408558;
+}
+
+.movie {
+    background-color: #222529;
+    width: 107%;
+    height: 21rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    margin-bottom: 1px;
+}
+
+.movieTitle {
+    color: rgb(228, 228, 228);
+    margin: 0 0.4rem;
+}
+
+
+#rating {
+    position: absolute;
+    margin: 0;
+    top: 10px;
+    left: 10px;
+    height: 2.5rem;
+    width: 2.5rem;
+    border: solid;
+    background-color: #408558;
+    color: white;
+    padding: 5px 0px;
+    border-radius: 2.5rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#pageEnd {
+    background-color: #222529;
+    height: 200px;
+    width: 100%;
+}
+
+
+.movie-container {
+    position: relative;
+    display: inline-block;
+}
+
+
+.poster {
+    border-radius: 10px;
+    width: 100%;
+    height: 16rem;
+    margin: 0;
+    display: block;
+}
+
+.moviePagePoster {
+    border-radius: 10px;
+    width: 32%;
+    float: right;
+    margin-bottom: 100px;
+}
+
+.sitebutton {
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #222529;
+    color: #408558;
+    text-align: center;
+    font-weight: bold;
+    line-height: 50px;
+    text-decoration: none;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.sitebutton:hover {
+    background-color: #408558;
+    color: white;
+}
+
+.movie {
+    background-color: #222529;
+    width: 107%;
+    height: 21rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    margin-bottom: 1px;
+}
+
+.movieTitle {
+    color: rgb(228, 228, 228);
+    margin: 0 0.4rem;
+}
+
+.subTitle {
+    color: #222529;
+    font-size: larger;
+    font-weight: bold;
+    margin: 0;
+}
+
+#rating {
+    position: absolute;
+    margin: 0;
+    top: 10px;
+    left: 10px;
+    height: 2.5rem;
+    width: 2.5rem;
+    border: solid;
+    background-color: #408558;
+    color: white;
+    padding: 5px 0px;
+    border-radius: 2.5rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#pageEnd {
+    background-color: #222529;
+    height: 200px;
+    width: 100%;
+}

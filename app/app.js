@@ -1,22 +1,26 @@
+// Set up node, express, content-flash, and sqlite
 const express = require('express');
 const session = require("express-session");
-var createError = require('http-errors');
 const path = require('path');
-const sqlite3 = require('sqlite3').verbose(); // Import SQLite module
-const sequelize = require('./utils/db');
-const { Op } = require('sequelize')
-const User = require('./models/User')
+const sqlite3 = require('sqlite3').verbose(); 
+const flash = require('connect-flash');
 const app = express();
+
+// Controllers
 const homeController = require('./controllers/homeController');
-const movieController = require("./controllers/movieController")
+const movieController = require("./controllers/movieController");
+const friendsController = require("./controllers/friendsController");
+const watchLaterController = require("./controllers/watchLaterController");
+const alreadyWatchedController = require("./controllers/alreadyWatchedController");
+const profileController = require("./controllers/profileController");
+const addMovieController = require("./controllers/addMovieController");
 const loginController = require('./controllers/loginController');
+const logoutController = require('./controllers/logoutController');
 const registerController = require('./controllers/registerController');
-var logger = require('morgan');
-const Friendship = require('./models/Friendship');
 
 // Serve public files from the public directory within the views directory
-// app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, 'public')));
+
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
 app.set("views", path.join(__dirname, "views"));
@@ -24,31 +28,18 @@ app.set("views", path.join(__dirname, "views"));
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(logger('dev'));
 
-app.set('trust proxy', 1) // trust first proxy
+// Trust first proxy
+app.set('trust proxy', 1) 
+
+// Session set up
 app.use(session({
   secret: 'wsu489',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }
 }))
-
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//     next(createError(404));
-//   });
-
-//   // error handler
-// app.use(function(err, req, res, next) {
-//     // set locals, only providing error in development
-//     res.locals.message = err.message;
-//     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-//     // render the error page
-//     res.status(err.status || 500);
-//     res.render('error');
-//   });
+app.use(flash());
 
 
 app.use(function (req, res, next) {
@@ -60,22 +51,6 @@ app.use(function (req, res, next) {
   next();
 })
 
-async function setup() {
-  const sawyer = await User.create({ username: "sawyer", password: "1234", email: "sb@sb.com" })
-  const trevor = await User.create({ username: "trevor", password: "1234", email: "tb@tb.com" })
-  const johnny = await User.create({ username: "johnny", password: "1234", email: "jg@jg.com" })
-  const friends = await Friendship.create({ username1: "sawyer", username2: "trevor" })
-  //const alsofriends = await Friendship.create({username1:"sawyer",username2:"johnny"})
-  // const friendList = await Friendship.findFriends("sawyer")
-  // console.log(Boolean(friendList.length == 2))
-  console.log("user instances created...")
-}
-
-sequelize.sync({ force: true }).then(() => {
-  console.log("Sequelize sync completed...")
-  setup().then(() => console.log("User setup complete"))
-})
-
 // SQLite database initialization
 const db = new sqlite3.Database('database.db', (err) => {
   if (err) {
@@ -85,13 +60,24 @@ const db = new sqlite3.Database('database.db', (err) => {
   }
 });
 
-// Use home controller
+// Use controllers
 app.use('/', homeController);
-// User login and register controller
-app.use('/login', loginController);
-app.use('/register', registerController);
-// Use movie controller
 app.use('/movie', movieController);
+app.use('/friends', friendsController);
+app.use('/watch-later', watchLaterController);
+app.use('/already-watched', alreadyWatchedController);
+app.use('/profile', profileController);
+app.use('/add-movie', addMovieController);
+app.use('/login', loginController);
+app.use('/logout', logoutController);
+app.use('/register', registerController);
+
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 // Start server
 const PORT = process.env.PORT || 3000;
