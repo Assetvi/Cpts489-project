@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="../css/main.css" />
         <link rel="icon" href="images/Icon.png"> <!-- Icon of page title -->
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
             rel="stylesheet">
@@ -40,6 +40,21 @@
                             <span class="sitebuttonContent">Add to already
                                 watched</span>
                         </a>
+                        <% if (friends == null){%>
+                        <a href="/usermovie/recommend?title=<%- movie.title%>" class="sitebutton">
+                            <span class="sitebuttonContent">Recommend</span>
+                        </a>
+                        <%}else{%>
+                        
+                        <p>Which friend do you want to recommend to?<p>
+                        <ul>
+                            <% for (friend of friends){%>
+                                <li><a href="#"><%= friend%></a></li>
+                                <%}%>
+                            </ul>
+                    <%}%>
+                        
+                            
                     </div>
 
                     <!-- Movie details -->
@@ -64,7 +79,7 @@
                         <p class="subTitle" style="margin-top: 30px">Director:
                         </p>
                         <p class="subTitle"
-                            style="font-weight: normal; margin-bottom: 30px; width: 65%;"><%=
+                            style="color: #408558; margin-bottom: 30px; "><%=
                             movie.director %></p>
                     </div>
                 </div>
