@@ -1,17 +1,17 @@
 const sequelize = require('../utils/db')
 const { Model, DataTypes, Op } = require('sequelize')
 
-class Movie extends Model {
-  static async findMovie(moviename) {
+class Recommend extends Model {
+  static async findRecommends(username) {
     try{
-    const movie = await Movie.findOne({
+    const recommends = await Recommend.findAll({
       where: {
-        title: moviename,
+        receiver: username,
       },
     });
-    return movie
+    return recommends
   } catch (error){
-    console.error('Error fetching movie:', error);
+    console.error('Error fetching recommendations:', error);
     return null
   }
 
@@ -20,29 +20,25 @@ class Movie extends Model {
 
 
 
-Movie.init({
+Recommend.init({
   // Model attributes are defined here
-  title: {
+  receiver: {
     type: DataTypes.STRING,
     primaryKey: true,
     allowNull: false
   },
-  director: {
+  moviename: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  year: {
+  sender: {
     type: DataTypes.STRING,
     allowNull: false
-  },
-  genre:{
-    type: DataTypes.STRING,
-    allowNull:false
   }
 }, {
   // Other model options go here
   sequelize, // We need to pass the connection instance
-  modelName: 'Movie' // We need to choose the model name
+  modelName: 'Recommend' // We need to choose the model name
 });
 
-module.exports = Movie;
+module.exports = Recommend;
