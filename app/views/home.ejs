@@ -39,8 +39,12 @@
                         <% if (movies && movies.length > 0) { %>
                         <% movies.forEach(movie => { %>
                         <div class="col-lg-2 col-md-3 col-sm-4">
+                            <% if (movie.id != null){ %>
                             <a href="/movie?id=<%- movie.id %>"
                                 style="text-decoration: none;">
+                                <% }else{%>
+                                    <a href="/usermovie?title=<%- movie.title%>"style="text-decoration: none;">
+                                    <%}%>
                                 <div class="movie">
                                     <% if (movie && movie.poster_path) { %>
                                     <div class="movie-container">

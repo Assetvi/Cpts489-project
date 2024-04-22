@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const TMDbAPI = require("../utils/TMDbCommunication"); // Import the TMDbCommunication module
+const Movie = require("../models/Movie");
 
 // Middleware function to check if user is logged in
 function requireLogin(req, res, next) {
@@ -21,9 +22,11 @@ router.get('/', requireLogin, async (req, res) => {
         const offset = (page - 1) * pageSize;
 
         const movies = await TMDbAPI.getAllMovies(maxMovies);
-        const totalPages = Math.ceil(movies.length / pageSize);
+        const userMovies = await Movie.findAll();
+        const allMovies = userMovies.concat(movies);
+        const totalPages = Math.ceil(allMovies.length / pageSize);
 
-        const paginatedMovies = movies.slice(offset, offset + pageSize);
+        const paginatedMovies = allMovies.slice(offset, offset + pageSize);
 
         // Pass an empty message if req.flash('message') is not set
         const message = req.flash('message')[0] || '';
