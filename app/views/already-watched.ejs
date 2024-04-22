@@ -25,12 +25,23 @@
       <div class="row">
         <div class="col">
           <h1
-            style="margin-bottom: 2rem; color:#222529; font-weight: bold;">
-            <%= user.username %>'s Already Watched </h1>
-            <a class="sitebutton" href="profile">
-                Back to profile
-            </a>
-        </div>
+          style="margin-bottom: 2rem; color:#222529; font-weight: bold;">
+          <%= user.username %>'s Already Watched </h1>
+          <div>
+              <ul>
+                  <% if (alreadyWatchedMovies.length > 0) { %>
+                  <% alreadyWatchedMovies.forEach(function(movie) { %>
+                  <li><%= movie %></li>
+                  <% }); %>
+                  <% } else { %>
+                  <li>No movies added yet.</li>
+                  <% } %>
+              </ul>
+          </div>
+          <a class="sitebutton" href="/profile">
+              Back to profile
+          </a>
+      </div>
       </div>
     </div>
   </body>

@@ -52,8 +52,8 @@ router.post('/', async function (req, res, next) {
             username,
             password,
             email,
-            watchlater: [],
-            alreadywatched: [],
+            watchlater: '',
+            alreadywatched: '',
             friends: []
         });
 
