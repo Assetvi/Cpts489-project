@@ -1,6 +1,5 @@
 const sequelize = require('../utils/db')
 const { Model, DataTypes, Op } = require('sequelize')
-//const { Op } = require('sequelize')
 
 class Friendship extends Model {
   static async findFriends(username) {

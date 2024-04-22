@@ -5,6 +5,8 @@ const path = require('path');
 const sqlite3 = require('sqlite3').verbose(); 
 const flash = require('connect-flash');
 const app = express();
+const Movie = require("./models/Movie");
+const Recommend = require("./models/Recommend");
 
 // Controllers
 const homeController = require('./controllers/homeController');
@@ -18,6 +20,8 @@ const loginController = require('./controllers/loginController');
 const logoutController = require('./controllers/logoutController');
 const registerController = require('./controllers/registerController');
 const usersController = require('./controllers/usersController');
+const recommendsController = require('./controllers/recommendsController');
+const usermovieController = require('./controllers/usermovieController');
 
 // Serve public files from the public directory within the views directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -58,6 +62,8 @@ const db = new sqlite3.Database('database.db', (err) => {
     console.error('Error connecting to SQLite database:', err.message);
   } else {
     console.log('Connected to SQLite database');
+    Movie.sync();
+    Recommend.sync();
   }
 });
 
@@ -73,6 +79,8 @@ app.use('/login', loginController);
 app.use('/logout', logoutController);
 app.use('/register', registerController);
 app.use('/users', usersController);
+app.use('/recommends', recommendsController);
+app.use('/usermovie', usermovieController);
 
 
 // Error handling middleware

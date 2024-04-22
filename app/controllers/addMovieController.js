@@ -38,10 +38,14 @@ router.post('/add', async (req, res) => {
         });
 
         // Respond with the newly created movie
-        res.status(201).json({ message: 'Movie added successfully', movie: newMovie });
+        //res.status(201).json({ message: 'Movie added successfully', movie: newMovie });
+        req.flash('message', 'Movie added successfully');
+        res.redirect("/")
     } catch (error) {
         console.error('Error adding movie:', error);
-        res.status(500).json({ error: 'Could not add the movie. Please try again later.' });
+        //res.status(500).json({ error: 'Could not add the movie. Please try again later.' });
+        req.flash('message', 'Could not add the movie. Please try again later.');
+        res.redirect("/add-movie")
     }
 });
 
