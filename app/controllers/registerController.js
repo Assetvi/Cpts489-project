@@ -24,8 +24,7 @@ const validateEmail = (email) => {
     return re.test(email);
 };
 
-// Route to handle registration
-router.post('/', async function(req, res, next) {
+router.post('/', async function (req, res, next) {
     const { username, password, email } = req.body;
     // Basic validation
     if (!username || !password || !email) {
@@ -47,7 +46,17 @@ router.post('/', async function(req, res, next) {
             res.redirect('/register');
             return;
         }
-        await User.create({ username, password, email });
+
+        // Create user with watchlater and alreadywatched as empty arrays
+        await User.create({
+            username,
+            password,
+            email,
+            watchlater: [],
+            alreadywatched: [],
+            friends: []
+        });
+
         req.flash('message', 'Registration successful, please log in');
         res.redirect('/login');
     } catch (error) {
@@ -56,5 +65,6 @@ router.post('/', async function(req, res, next) {
         res.redirect('/register');
     }
 });
+
 
 module.exports = router;

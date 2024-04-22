@@ -1,12 +1,13 @@
+// models/User.js
+const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../utils/db');
-const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
 class User extends Model {
   static async findUser(username, password) {
     try {
       const user = await User.findByPk(username);
-      if (user && bcrypt.compareSync(password, user.password)) { // Compare hashed password
+      if (user && bcrypt.compareSync(password, user.password)) {
         return user;
       } else {
         return null;
@@ -28,17 +29,32 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false,
     set(value) {
-      this.setDataValue('password', bcrypt.hashSync(value, 10)); // Automatically hash password on set
+      this.setDataValue('password', bcrypt.hashSync(value, 10));
     }
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true, // Ensure email uniqueness within the database
+    unique: true,
     validate: {
-      isEmail: true, // Validates email format
+      isEmail: true
     }
   },
+  watchlater: {
+    type: DataTypes.JSONB, 
+    allowNull: false,
+    defaultValue: []
+  },
+  alreadywatched: {
+    type: DataTypes.JSONB, 
+    allowNull: false,
+    defaultValue: []
+  },
+  friends: {
+    type: DataTypes.JSONB, 
+    allowNull: false,
+    defaultValue: []
+  }
 }, {
   sequelize,
   modelName: 'User'

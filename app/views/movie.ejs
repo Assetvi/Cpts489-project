@@ -34,15 +34,26 @@
 
                     <!-- Watch later and already watched buttons -->
                     <div>
-                        <a href="/" class="sitebutton">
-                            <span class="sitebuttonContent">Add to watch
-                                later</span>
-                        </a>
+                        <!-- Form to add to watch later -->
+                        <form action="/profile/add-to-watchlater" method="post">
+                            <input type="hidden" name="movieTitle"
+                                value="<%= movie.title %>">
+                            <button type="submit" class="sitebutton" style="width: 500px; line-height: 20px;">
+                                <span class="sitebuttonContent">Add "<%=
+                                    movie.title %>" to watch later</span>
+                            </button>
+                        </form>
 
-                        <a href="/" class="sitebutton">
-                            <span class="sitebuttonContent">Add to already
-                                watched</span>
-                        </a>
+                        <!-- Form to add to already watched -->
+                        <form action="/profile/add-to-alreadywatched"
+                            method="post">
+                            <input type="hidden" name="movieTitle"
+                                value="<%= movie.title %>">
+                            <button type="submit" class="sitebutton" style="width: 500px; line-height: 20px;">
+                                <span class="sitebuttonContent">Add "<%=
+                                    movie.title %>" to already watched</span>
+                            </button>
+                        </form>
                     </div>
 
                     <!-- Movie details -->
