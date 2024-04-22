@@ -21,10 +21,10 @@ class Friendship extends Model {
     return friendNames
   }
 
-  static async deleteFriend(username1, username2){
+  static async deleteFriend(username1, username2) {
     const byeFriend = await Friendship.findOne({
       where: {
-        [Op.or]: [{username1:username1, username2:username2},{username1:username2,username2:username1}]
+        [Op.or]: [{ username1: username1, username2: username2 }, { username1: username2, username2: username1 }]
       }
     })
     await byeFriend.destroy()

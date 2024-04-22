@@ -79,9 +79,10 @@ router.post('/add-to-alreadywatched', async (req, res) => {
     }
 });
 
-router.get("/:username", async (req, res,) => {
+router.get("/", async (req, res,) => {
     try {
-        const user = await User.findByPk(req.params.username)
+        const username = req.session.user.username;
+        const user = await User.findByPk(username)
         if (!user) {
             req.flash('message', 'User not found');
             return res.redirect('/'); // Redirect to home or handle error
