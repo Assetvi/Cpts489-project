@@ -22,18 +22,18 @@ router.get('/', requireLogin, async (req, res) => {
 router.post('/add', async (req, res) => {
     try {
         // Extract movie details from the request body
-        const { title, director, year, genre } = req.body;
+        const { title, vote_average, release_date, genre } = req.body;
 
         // Check if all required fields are provided
-        if (!title || !director || !year || !genre) {
+        if (!title || !vote_average || !release_date || !genre) {
             return res.status(400).json({ error: 'Please provide all required fields: title, director, year, genre' });
         }
 
         // Create the new movie in the database
         const newMovie = await Movie.create({
             title,
-            director,
-            year,
+            vote_average,
+            release_date,
             genre,
         });
 
