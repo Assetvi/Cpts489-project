@@ -28,10 +28,11 @@
                 </h1>
                 <ul title="Friends:">
                     <% for ( friend of friends){%>
-                        <li><a href=<%="/profile/" +friend %>><%= friend%></a></li>
+                        <li><a style="margin-bottom: 50px; color:#408558;" href=<%="/profile/" +friend %>><%= friend%>
+                                    </a></li>
                         <%}%>
                 </ul>
-                <a href="/users">Add more friends!</a>
+                <a class="sitebutton" href="/users">Add more friends!</a>
                 <a class="sitebutton" href="profile">
                     Back to profile
                 </a>

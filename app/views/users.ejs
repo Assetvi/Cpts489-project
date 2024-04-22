@@ -5,6 +5,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="icon" href="/images/Icon.png"> <!-- Icon of page title -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../controllers/usersController.js"></script>
 </head>
 
 <body>
@@ -12,13 +17,15 @@
         <h2>Users</h2>
         <ul>
             <% for ( user of users){%>
-                <li><a href = <%= "/profile/"+user.username %>><%= user.username%></a>
+                <li><a style="margin-bottom: 50px; color:#408558;" href = <%= "/profile/"+user.username %>><%= user.username%></a>
                     <% if (friends.includes(user.username)){ %>
-                        <p>A friend!</p>
+                        <a class = "pagebutton" href = <%="/users/removefriend/"+user.username%>>Remove Friend</a>
                     <% }else{ %>
-                    <button type="button"><a href = <%="/addfriend/"+user.username%>>Add Friend</a></button>
+                    <a class = "pagebutton" href = <%="/users/addfriend/"+user.username%>>Add Friend</a>
                     <%}%>
                 </li>
+                <br>
                     <%}%>
         </ul>
+        <a class = "sitebutton"  href ="friends">Back to Friends</a>
 </body>

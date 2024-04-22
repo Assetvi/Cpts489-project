@@ -20,7 +20,18 @@ class Friendship extends Model {
     }
     return friendNames
   }
+
+  static async deleteFriend(username1, username2){
+    const byeFriend = await Friendship.findOne({
+      where: {
+        [Op.or]: [{username1:username1, username2:username2},{username1:username2,username2:username1}]
+      }
+    })
+    await byeFriend.destroy()
+  }
 }
+
+
 
 Friendship.init({
   // Model attributes are defined here

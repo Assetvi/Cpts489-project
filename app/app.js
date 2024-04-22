@@ -17,6 +17,7 @@ const addMovieController = require("./controllers/addMovieController");
 const loginController = require('./controllers/loginController');
 const logoutController = require('./controllers/logoutController');
 const registerController = require('./controllers/registerController');
+const usersController = require('./controllers/usersController');
 
 // Serve public files from the public directory within the views directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -71,6 +72,7 @@ app.use('/add-movie', addMovieController);
 app.use('/login', loginController);
 app.use('/logout', logoutController);
 app.use('/register', registerController);
+app.use('/users', usersController);
 
 
 // Error handling middleware
