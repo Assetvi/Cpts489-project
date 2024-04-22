@@ -35,7 +35,7 @@
                     <!-- Watch later and already watched buttons -->
                     <div>
                         <!-- Form to add to watch later -->
-                        <form action="/profile/add-to-watchlater" method="post">
+                        <form action="/watch-later/add-to-watchlater" method="post">
                             <input type="hidden" name="movieTitle"
                                 value="<%= movie.title %>">
                             <button type="submit" class="sitebutton" style="width: 500px; line-height: 20px;">
@@ -45,7 +45,7 @@
                         </form>
 
                         <!-- Form to add to already watched -->
-                        <form action="/profile/add-to-alreadywatched"
+                        <form action="/already-watched/add-to-alreadywatched"
                             method="post">
                             <input type="hidden" name="movieTitle"
                                 value="<%= movie.title %>">

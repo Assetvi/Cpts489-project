@@ -1,4 +1,3 @@
-// models/User.js
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../utils/db');
 const bcrypt = require('bcryptjs');
@@ -41,17 +40,17 @@ User.init({
     }
   },
   watchlater: {
-    type: DataTypes.JSONB, 
-    allowNull: false,
-    defaultValue: []
+    type: DataTypes.STRING, 
+    allowNull: true,
+    defaultValue: '' // Set default value to empty string
   },
   alreadywatched: {
-    type: DataTypes.JSONB, 
-    allowNull: false,
-    defaultValue: []
+    type: DataTypes.STRING, 
+    allowNull: true,
+    defaultValue: '' // Set default value to empty string
   },
   friends: {
-    type: DataTypes.JSONB, 
+    type: DataTypes.JSONB,
     allowNull: false,
     defaultValue: []
   }
